@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <style>
+        .circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 1px solid orange;
+            display: inline-block;
+            margin: 40px;
+        }
+
+        .red {background: red;}
+        .blue {background: blue;}
+        .green {background: green;}
+    </style>
+</head>
+<body>
+    <div id="part1" @mousemove="handleMouse">
+        <button @click="showFirstPart = !showFirstPart">Show first part</button>
+        <div v-show="showFirstPart">
+            <h1>String: {{ name }}!</h1>
+            <h1>Sum(10 + 60): {{ 10 + 60 }}!</h1>
+            <h1>Number: {{ number }}!</h1>
+            <hr>
+            <h1>Method: {{ sayHello()}}</h1>
+            <h1>If statement: {{ isOk ? 'I am OK' : 'I am not OK!' }} </h1>
+            <hr>
+            <input type="text" v-on:input="changeName" />
+            <h1>Functions: {{ string.split('').reverse().join('') }} </h1>
+            <h2><a :href="url">{{ url }}</a></h2>
+            <h2 v-html="link"></h2>
+            <hr>
+            <h2>Счетчик = {{ counter }}</h2>
+            <button v-on:click="inc">Увеличить</button>
+            <hr>
+            <h2 v-on:mouseover="onHover" >Счетчик2 = {{ counter2 }}</h2>
+            <button v-on:click="counter2++">Увеличить2</button>
+            <hr>
+            <h2>{{ title }} = {{ counter3 }}</h2>
+            <button v-on:click="inc3(5, 'изменено на 5', $event)">Увеличить3 на 5</button>
+            <button v-on:click="inc3(10, 'изменено на 10', $event)">Увеличить3 на 10</button>
+            <hr>
+            <h2><a href="http://google.com" target="_blank" @click.prevent="">Google Link</a></h2>
+            <h2>
+                X: {{ x }} Y {{ y }}
+                <span @mousemove.stop="">не изменять</span>
+            </h2>
+            <hr>
+            <h2>Алерт по нажатию</h2>
+            <h2><input type="text" v-on:keyup.enter="alertValue" /></h2>
+            <hr>
+            <h2>Двустороннее связывание v-model</h2>
+            <input type="text" v-model="inputValue">
+            <h2>{{ inputValue }}</h2>
+            <hr>
+            <div
+                    class="circle"
+                    @click="isActive = !isActive"
+                    :class="getCssClasses"
+            ></div>
+
+            <div class="circle" :class="[color, 'red']"> </div>
+            <input type="text" v-model="color" />
+            <input type="text" v-model="height" />
+            <div class="circle" :style="circleClasses"></div>
+            <div class="circle" :style="[circleClasses, {'width': height + 'px'}]"></div>
+            <hr>
+            <h2 v-if = "isVisible">I am visible</h2>
+            <h2 v-else>No i am not</h2>
+            <button @click="isVisible = !isVisible">Toggle</button>
+            <hr>
+            <h2 v-if="type === 'a'">A</h2>
+            <h2 v-else-if="type === 'b'">B</h2>
+            <h2 v-else-if="type === 'c'">C</h2>
+            <h2 v-else>Not Match</h2>
+            <input type="text" v-model="type" />
+            <hr>
+            <temlplate v-if="isVisible">
+                <h1>Title1</h1>
+                <p>Lorem ipsum dolor sit amet.</p>
+            </temlplate>
+            <template v-else>
+                <h1 style="color: red" >Title2</h1>
+                <p style="color: darkblue" >Amet. Lorem ipsum dolor sit amet.</p>
+            </template>
+        </div>
+    </div>
+    <div id="part2">
+        <button @click="showSecondPart = !showSecondPart">Show second part</button>
+        <div v-show="showSecondPart">
+            <hr>
+
+            <hr>
+            <h2>Counter: {{ counter }} / {{ counter2 }}</h2>
+            <h3>Result: {{ result() }}</h3>
+            <h3>ComputedResult:  {{ computedResult }}</h3>
+            <button @click="add">Add</button>
+            <button @click="sub">Sub</button>
+            <button @click="counter2++">Add counter2</button>
+            <hr>
+            <h1>выводим массив строк</h1>
+            <ul>
+                <li v-for="(hum, index) in people">{{ index + 10 }} {{ hum }} </li>
+            </ul>
+            <h1>массив элементов</h1>
+            <ul>
+                <li v-for="(hum, index) of humans">{{ index + 1 }}. <b>{{ hum.name }}</b> - {{ hum.age }} </li>
+            </ul>
+            <h1>Перечесление</h1>
+            <ul>
+                <li v-for="num of 4"> {{ num }}</li>
+            </ul>
+            <h1>Данные обьекта</h1>
+            <ul>
+                <li v-for="(value, key, index) of person"> <em>{{ index + 1 }}</em> {{ key }} : {{ value }}</li>
+            </ul>
+            <hr>
+        </div>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#part2',
+            data: {
+                counter: 0,
+                counter2: 0,
+                showSecondPart: true,
+                people: [
+                    'vlad',
+                    'max',
+                    'elena',
+                    'volodya'
+                ],
+                humans: [
+                    {name: 'Tolik', age: 27},
+                    {name: 'Denis', age: 27},
+                    {name: 'Semen', age: 27}
+                ],
+                person: {
+                    name: 'Max',
+                    age: 50,
+                    job: 'Front End'
+                }
+            },
+            methods: {
+                add: function () {
+                    this.counter++;
+
+                },
+                sub: function () {
+                    this.counter--;
+
+
+                },
+                result: function () {
+                    return this.cond =  this.counter > 3 ? 'More than 3' : 'Less than 3';
+                }
+            },
+            computed: {
+                computedResult: function () {
+                    return this.cond =  this.counter > 3 ? 'More than 3' : 'Less than 3';
+                }
+            },
+            watch: {
+
+            }
+        });
+        new Vue({
+            el: '#part1',
+            data: {
+                showFirstPart: false,
+                showSecondPart: true,
+                type: 'a',
+                isVisible: true,
+                height: 100,
+                color: 'blue',
+                isActive: false,
+                name: 'Vue',
+                number: 100,
+                isOk: true,
+                string: "KoKoKo - is great movie",
+                url: "http://vk.com/",
+                link: '<a href="http://vk.com/">Google<a>',
+                counter: 0,
+                counter2: 0,
+                counter3: 0,
+                title: 'Счетчик',
+                x: 0,
+                y: 0,
+                inputValue: 'Что за велью такое'
+            },
+            computed: {
+                getCssClasses: function() {
+                    return {
+                        'red': this.isActive,
+                        'green': !this.isActive
+                    }
+                },
+                circleClasses: function () {
+                    return {
+                        'background': this.color,
+                        'height': this.height + 'px'
+                    }
+                }
+            },
+            methods: {
+
+                changeName: function () {
+                    this.string = event.target.value;
+                },
+                sayHello: function () {
+                    return 'How are you?'
+                },
+                inc: function () {
+                    this.counter++;
+                },
+                inc3: function (num, str, event) {
+                    this.counter3+=num;
+                    this.title = str;
+
+                    if(num === 5) {
+                        event.target.style.color = 'blue';
+                    } else if (num === 10) {
+                        event.target.style.color = 'red';
+                    }
+                },
+                onHover: function (event) {
+                    event.target.style.color = 'red';
+                },
+                handleMouse: function (event) {
+                    this.x = event.clientX;
+                    this.y = event.clientY;
+                },
+                alertValue(event) {
+                    alert(event.target.value);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

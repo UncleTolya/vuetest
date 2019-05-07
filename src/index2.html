@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    <div id="app">
+        <h2 ref="heading">{{ title }}</h2>
+        <button @click="updateTitle()">Update title</button>
+    </div>
+    <div id="app2">
+        <h2>{{ title }}</h2>
+        <button @click="updateFirstTitle()">Update title 2</button>
+    </div>
+
+    <script>
+        let vue1 = new Vue({
+            el: '#app',
+            data: {
+                title: 'Hello I am Vue'
+            },
+            methods: {
+                updateTitle: function() {
+                    this.title = 'New Title';
+                    this.$refs.heading.style.color = 'red';
+                    console.log(this.$refs);
+                },
+                alertsFast: function () {
+                    alert('I am from Vue 1');
+                }
+            }
+        });
+        new Vue({
+            el: '#app2',
+            data: {
+                title: 'Hello I am Vue 2'
+            },
+            methods: {
+                updateFirstTitle: function () {
+                    vue1.title = 'Updated from second vue';
+                    setTimeout(function (){
+                        vue1.alertsFast();
+                    }, 1000);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
