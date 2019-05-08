@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>vuetest</title>
+<!--    <script src="/dist/build.js"></script>-->
+
+  </head>
+  <body>
+    <div id="app">
+      <my-counter v-for="c in 3"></my-counter>
+    </div>
+    <hr>
+    <div id="app2">
+      <my-counter></my-counter>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+      let component = {
+        template: `
+          <div style="border: 1px solid black; padding: 10px">
+            <h2>Counter: {{ counter }}</h2>
+            <button @click="add">inc</button>
+          </div>
+        `,
+        data: function() {
+          return {
+            counter: 0
+          }
+        },
+        methods: {
+          add: function () {
+            this.counter++;
+          }
+        }
+      };
+
+      new Vue({
+        el: "#app",
+        components: {
+          'my-counter': component
+        }
+      });
+
+      new Vue({
+        el: "#app2",
+        components: {
+          myCounter: component
+        }
+      });
+    </script>
+  </body>
+</html>
