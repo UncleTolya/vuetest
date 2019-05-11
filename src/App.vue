@@ -1,31 +1,27 @@
 <template>
   <div>
-    <h1>Parent: {{ msg }}</h1>
-    <h1>Parent: Car: {{ carName }}</h1>
-    <app-car :carName="carName"
-             :carYear="carYear"
-    ></app-car>
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav">
+<!--            <router-link tag="li" class="nav-item" exact :to="'/users'" active-class="active">-->
+<!--              <a class="nav-link">Users</a>-->
+<!--            </router-link>-->
+          </ul>
+        </div>
+      </nav>
+      <router-view></router-view>
+    </div>
   </div>
-
 </template>
 
 <script>
-  import Car from './Car.vue'
 
-
+  import UsersPage from "./pages/Users";
   export default {
-    data () {
-      return {
-        carName: 'Ford',
-        carYear: 2019,
-        msg: 'Welkommen'
-      }
-    },
-    components: {
-      appCar: Car
-    }
+    components: {UsersPage},
   }
 </script>
 
-<style>
+<style scoped>
 </style>
