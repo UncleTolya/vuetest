@@ -3,16 +3,13 @@ let path = require('path');
 let dataDir = '../testdata';
 let users = [];
 let idCounter = 0;
-let usersIds = [];
 
 fs.readdirSync(dataDir).forEach(file => {
   let params = path.basename(file).split('#');
   let userId = +params[1].substring(1);
-  let timeStamp = params[2];
   let data = fs.readFileSync(dataDir + '/' + file).toString();
   try {
     let fingerPrint = JSON.parse(data);
-    fingerPrint.timeStamp = timeStamp;
     let noUserId = true;
     for (const user of users) {
       if (user.userId == userId) {
