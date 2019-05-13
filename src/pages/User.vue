@@ -30,7 +30,7 @@
             </v-img>
 
             <v-list two-line>
-              <v-list-tile :href="getLastPrint(getUser).url" target="_blank">
+              <v-list-tile>
 
                 <v-list-tile-content>
                   <v-list-tile-title>{{ getLastPrint(getUser).firstName }} {{ getLastPrint(getUser).lastName }}</v-list-tile-title>
@@ -44,7 +44,7 @@
               <v-list-tile :href="getLastPrint(getUser).url" target="_blank">
 
                 <v-list-tile-content>
-                  <v-list-tile-title>{{getLastPrint(getUser).id}}</v-list-tile-title>
+                  <v-list-tile-title>ID {{getLastPrint(getUser).id}}</v-list-tile-title>
                   <v-list-tile-sub-title>VK LINK</v-list-tile-sub-title>
                 </v-list-tile-content>
 

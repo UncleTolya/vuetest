@@ -10,5 +10,6 @@ export default {
       this.resource.get()
         .then(resp => resp.json())
         .then(users => this.users = users);
+
     }
 }
