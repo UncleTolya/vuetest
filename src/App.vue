@@ -10,7 +10,9 @@
 
   import UsersPage from "./pages/Users";
   export default {
-    components: {UsersPage},
+    components: {
+      UsersPage
+    },
   }
 </script>
 

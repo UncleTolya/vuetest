@@ -3,6 +3,7 @@ import ErrorComp from './pages/Error'
 import Users from './pages/Users'
 import User from './pages/User'
 import UserFull from './pages/UserFull'
+import UserTL from './pages/UserTL'
 
 
 
@@ -20,6 +21,11 @@ export default new VueRouter ({
           path: 'full',
           component: UserFull,
           name: 'userFull',
+        },
+        {
+          path: 'tl',
+          component: UserTL,
+          name: 'userTL',
         }
       ]
     },

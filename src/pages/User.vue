@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="container">
     <v-app id="inspire">
       <v-layout row>
         <v-flex>
@@ -53,10 +53,15 @@
 
               <router-link tag="v-list-tile" :to="{name: 'userFull', params:{id: id}, hash: '#scroll'}">
                 <v-list-tile-content>
-                  <v-list-tile-title class="text-xl-center" style="font-size: 30px">SHOW FINGERPRINTS</v-list-tile-title>
+                  <v-list-tile-title @click="showTimeLine = !showTimeLine" class="text-xl-center" style="font-size: 30px">SHOW FINGERPRINTS</v-list-tile-title>
                 </v-list-tile-content>
               </router-link>
-              <router-view :id="id"></router-view>
+              <router-link tag="v-list-tile" :to="{name: 'userTL', params:{id: id}, hash: '#scroll'}">
+                <v-list-tile-content>
+                  <v-list-tile-title @click="showTimeLine = !showTimeLine" class="text-xl-center" style="font-size: 30px">development version</v-list-tile-title>
+                </v-list-tile-content>
+              </router-link>
+              <router-view v-if="showTimeLine" :id="id"></router-view>
             </v-list>
           </v-card>
         </v-flex>
@@ -71,7 +76,8 @@
     mixins: [UserListMixin],
     data() {
       return {
-        id: this.$route.params['id']
+        id: this.$route.params['id'],
+        showTimeLine: false,
       }
     },
     methods: {

@@ -8,7 +8,7 @@
 #install node.js
 brew install node
 
-go app folder
+#go app folder
 #install dependencies
 npm install
 

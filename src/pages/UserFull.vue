@@ -16,7 +16,7 @@
     <div class="container">
       <div class="row">
         <div class="col-6">
-          <h2>Current TimeStamp</h2>
+          <h2>Current state: </h2>
           <pre style="font-size: 20px">{{ getPrints[currentFingerPrint] }}</pre>
         </div>
         <div class="col-6">
