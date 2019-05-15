@@ -51,17 +51,18 @@
               </v-list-tile>
               <v-divider inset></v-divider>
 
-              <router-link tag="v-list-tile" :to="{name: 'userFull', params:{id: id}, hash: '#scroll'}">
-                <v-list-tile-content>
-                  <v-list-tile-title @click="showTimeLine = !showTimeLine" class="text-xl-center" style="font-size: 30px">SHOW FINGERPRINTS</v-list-tile-title>
-                </v-list-tile-content>
-              </router-link>
-              <router-link tag="v-list-tile" :to="{name: 'userTL', params:{id: id}, hash: '#scroll'}">
-                <v-list-tile-content>
-                  <v-list-tile-title @click="showTimeLine = !showTimeLine" class="text-xl-center" style="font-size: 30px">development version</v-list-tile-title>
-                </v-list-tile-content>
-              </router-link>
-              <router-view v-if="showTimeLine" :id="id"></router-view>
+<!--              <router-link tag="v-list-tile" :to="{name: 'userFull', params:{id: id}, hash: '#scroll'}">-->
+<!--                <v-list-tile-content>-->
+<!--                  <v-list-tile-title @click="showTimeLine = !showTimeLine" class="text-xl-center" style="font-size: 30px">SHOW FINGERPRINTS</v-list-tile-title>-->
+<!--                </v-list-tile-content>-->
+<!--              </router-link>-->
+<!--              <router-link tag="v-list-tile" :to="{name: 'userTL', params:{id: id}, hash: '#scroll'}">-->
+<!--                <v-list-tile-content>-->
+<!--                  <v-list-tile-title @click="showTimeLine = !showTimeLine" class="text-xl-center" style="font-size: 30px">development version</v-list-tile-title>-->
+<!--                </v-list-tile-content>-->
+<!--              </router-link>-->
+<!--              <router-view v-if="showTimeLine" :id="id"></router-view>-->
+              <user-t-l :user="getUser"></user-t-l>
             </v-list>
           </v-card>
         </v-flex>
@@ -72,12 +73,14 @@
 
 <script>
   import UserListMixin from '../mixins/mix_usersList.js';
+  import UserTL from "../components/user-timeline/UserTL";
+
   export default {
+    components: {UserTL},
     mixins: [UserListMixin],
     data() {
       return {
         id: this.$route.params['id'],
-        showTimeLine: false,
       }
     },
     methods: {
@@ -85,7 +88,7 @@
         this.$router.push('/users')
       },
       getLastPrint(user) {
-        return user.fingerPrints[user.fingerPrints.length-1];
+        return user.states[user.states.length-1];
       }
     },
     computed: {

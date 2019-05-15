@@ -9,16 +9,16 @@ fs.readdirSync(dataDir).forEach(file => {
   let userId = +params[1].substring(1);
   let data = fs.readFileSync(dataDir + '/' + file).toString();
   try {
-    let fingerPrint = JSON.parse(data);
+    let state = JSON.parse(data);
     let noUserId = true;
     for (const user of users) {
       if (user.userId == userId) {
         noUserId = false;
-        user.fingerPrints.push(fingerPrint);
+        user.states.push(state);
       }
     }
     if (noUserId) {
-      users.push({"id": idCounter++,"userId": userId, "fingerPrints": [fingerPrint]});
+      users.push({"id": idCounter++,"userId": userId, "states": [state]});
     }
   } catch (e) {
     console.log(e);

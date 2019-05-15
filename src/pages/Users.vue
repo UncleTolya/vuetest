@@ -1,5 +1,5 @@
 <template>
-      <div id="app">
+      <div id="app" class="container">
         <v-app id="inspire">
           <h1 class="text-xl-center">ALL USERS IN DATABASE</h1>
           <loading v-if="isNoLoad"></loading>
@@ -38,7 +38,7 @@
     methods: {
       getLastPrint(user) {
         this.isNoLoad = false;
-        return user.fingerPrints[user.fingerPrints.length-1];
+        return user.states[user.states.length-1];
       }
     },
     computed: {

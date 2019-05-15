@@ -1,9 +1,9 @@
 import VueRouter from 'vue-router'
-import ErrorComp from './pages/Error'
+import ErrorComp from './components/Error'
 import Users from './pages/Users'
 import User from './pages/User'
-import UserFull from './pages/UserFull'
-import UserTL from './pages/UserTL'
+import UserFull from './components/user-timeline/UserFull'
+import UserTL from './components/user-timeline/UserTL'
 
 
 
