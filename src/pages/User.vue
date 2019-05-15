@@ -62,7 +62,7 @@
 <!--                </v-list-tile-content>-->
 <!--              </router-link>-->
 <!--              <router-view v-if="showTimeLine" :id="id"></router-view>-->
-              <user-t-l :user="getUser"></user-t-l>
+              <user-states-time-line :user="getUser"></user-states-time-line>
             </v-list>
           </v-card>
         </v-flex>
@@ -72,12 +72,13 @@
 </template>
 
 <script>
-  import UserListMixin from '../mixins/mix_usersList.js';
-  import UserTL from "../components/user-timeline/UserTL";
+  import UserListService from '../mixins/userListService.js';
+  import UserStatesTimeLine from "../components/user-timeline/UserTimeLine";
+  import UserStates from "../components/user-timeline/UserStates";
 
   export default {
-    components: {UserTL},
-    mixins: [UserListMixin],
+    components: {UserStatesTimeLine, UserStates},
+    mixins: [UserListService],
     data() {
       return {
         id: this.$route.params['id'],

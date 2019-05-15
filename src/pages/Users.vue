@@ -23,7 +23,7 @@
 </template>
 
 <script>
-  import UserListMixin from '../mixins/mix_usersList.js'
+  import UserListMixin from '../mixins/userListService.js'
   import Loading from "../components/Loading";
 
   export default {

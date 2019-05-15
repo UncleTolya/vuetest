@@ -7,6 +7,7 @@
       </v-flex>
       <v-flex xs6>
         <user-changes
+          :user="user"
           :states="states"
           :currentStateId="currentStateId"
         ></user-changes>
@@ -22,7 +23,8 @@
     name: 'userStates',
     props: {
       states: Array,
-      currentStateId: Number
+      currentStateId: Number,
+      user: Object
     },
     components: {
       UserChanges

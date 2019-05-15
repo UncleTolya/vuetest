@@ -11,11 +11,17 @@
 </template>
 
 <script>
+  import UserService from '../../mixins/userService.js';
+
   export default {
     name: "UserChanges",
     props: {
       states: Array,
-      currentStateId: Number
+      currentStateId: Number,
+      user: Object
+    },
+    mixins: {
+      UserService
     },
     computed: {
       getChanges() {

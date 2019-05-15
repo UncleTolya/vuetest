@@ -8,8 +8,10 @@ fs.readdirSync(dataDir).forEach(file => {
   let params = path.basename(file).split('#');
   let userId = +params[1].substring(1);
   let data = fs.readFileSync(dataDir + '/' + file).toString();
+  let timeStamp = params[2].split('.')[0] + '000';
   try {
     let state = JSON.parse(data);
+    state.timeStamp = timeStamp;
     let noUserId = true;
     for (const user of users) {
       if (user.userId == userId) {

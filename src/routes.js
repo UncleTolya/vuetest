@@ -2,8 +2,7 @@ import VueRouter from 'vue-router'
 import ErrorComp from './components/Error'
 import Users from './pages/Users'
 import User from './pages/User'
-import UserFull from './components/user-timeline/UserFull'
-import UserTL from './components/user-timeline/UserTL'
+import UserTimeLine from './components/user-timeline/UserTimeLine'
 
 
 
@@ -18,14 +17,9 @@ export default new VueRouter ({
       component: User,
       children: [
         {
-          path: 'full',
-          component: UserFull,
-          name: 'userFull',
-        },
-        {
           path: 'tl',
-          component: UserTL,
-          name: 'userTL',
+          component: UserTimeLine,
+          name: 'userTimeLine',
         }
       ]
     },
