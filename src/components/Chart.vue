@@ -30,7 +30,7 @@
           view.label = "There are no changes";
           view.name = "There are no changes";
         }
-        view.description = 'description';
+        // view.description = 'description';
         views.push(view);
         this.chartOptions.series[0].data = views;
       }
@@ -58,11 +58,11 @@
             enabled: false
           },
           title: {
-            text: 'Timeline of Space Exploration'
+            text: 'Timeline of Profile Changes'
           },
-          subtitle: {
-            text: 'Info source: <a href="https://en.wikipedia.org/wiki/Timeline_of_space_exploration">www.wikipedia.org</a>'
-          },
+          // subtitle: {
+          //   text: 'Info source: <a href="https://en.wikipedia.org/wiki/Timeline_of_space_exploration">www.wikipedia.org</a>'
+          // },
           tooltip: {
             style: {
               width: 300
