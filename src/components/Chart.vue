@@ -14,29 +14,35 @@
     created() {
       let views = [];
       const diff = require('deep-diff');
-                                                            // ошибка интервала
-      for (let i = 1; i < this.states.length; i++) {
+      for (let i = 0; i < this.states.length; i++) {
         let view = {};
         view.id = i;
-        const pastState = this.states[i - 1];
         const currentState = this.states[i];
         view.x = new Date(+currentState.timeStamp);
-        const changes = diff(pastState, currentState);
-        view.color = 'grey';
-        if (changes.length > 0) {
+        if (i > 0) {
+          const pastState = this.states[i - 1];
+          const changes = diff(pastState, currentState);
           view.label = "There are " + changes.length + " changes";
           view.name = "There are " + changes.length + " changes";
+          view.color = 'green';
+          for (const change of changes) {
+            if (change.kind != 'E' && change.path[0] != 'original') {
+              view.color = 'red';
+            }
+          }
         } else {
           view.label = "There are no changes";
           view.name = "There are no changes";
+          view.color = 'grey';
         }
         // view.description = 'description';
         views.push(view);
-        this.chartOptions.series[0].data = views;
       }
+      this.chartOptions.series[0].data = views;
     },
     data() {
       return {
+        notImportantChangesPaths: [],
         changes: [],
         chartOptions: {
           chart: {
@@ -60,9 +66,6 @@
           title: {
             text: 'Timeline of Profile Changes'
           },
-          // subtitle: {
-          //   text: 'Info source: <a href="https://en.wikipedia.org/wiki/Timeline_of_space_exploration">www.wikipedia.org</a>'
-          // },
           tooltip: {
             style: {
               width: 300
@@ -87,6 +90,7 @@
                 '{point.x:%d %b %Y}</span><br/>{point.label}',
               distance: 100,
             },
+            cropThreshold: 1000000,
             marker: {
               symbol: 'diamond'
             },

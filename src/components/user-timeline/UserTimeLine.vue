@@ -20,7 +20,7 @@
     name: 'userStatesTimeLine',
     data() {
       return{
-        currentStateId: 1
+        currentStateId: 0
       }
     },
     props: {
