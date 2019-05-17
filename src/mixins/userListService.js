@@ -1,7 +1,7 @@
 export default {
   data() {
     return {
-      searchName: '2222',
+      searchName: '',
       users: []
     }
   },
