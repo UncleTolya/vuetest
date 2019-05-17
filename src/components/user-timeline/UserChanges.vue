@@ -12,6 +12,7 @@
 
 <script>
   import UserService from '../../mixins/userService.js';
+  import ChangeTypeEnum from '../../enums/changeTypeEnum';
 
   export default {
     name: "UserChanges",
@@ -20,9 +21,8 @@
       currentStateId: Number,
       user: Object
     },
-    mixins: {
-      UserService
-    },
+    mixins: [UserService,
+      ChangeTypeEnum],
     computed: {
       getChanges() {
         let changes = {};
@@ -39,33 +39,32 @@
       showChange(change) {
         if (change.length === 0) return "empty";
         let resultHTML = '';
-        let kind = change.kind;
-        switch (kind) {
-          case 'A':
-            resultHTML += '<h3 style="color: blue;">Change occurred within an array</h3>';
+        switch (change.kind) {
+          case this.ChangeType.ARRAY.TITLE:
+            resultHTML += '<h3 style="color: pink;">Change occurred within an array</h3>';
             resultHTML += '<h3>Where: ';
             change.path.forEach(path => resultHTML += path + " ");
             resultHTML += '</h3><br>';
             resultHTML += '<h3>Index: ' + change.index + '</h3>';
             resultHTML += '<h3>' + this.showChange(change.item) +  '</h3>';
             break;
-          case 'E':
-            resultHTML += '<h3 style="color: limegreen;">Property/element was edited</h3><br>' ;
+          case this.ChangeType.EDITED.TITLE:
+            resultHTML += '<h3 style="color: green;">Property/element was edited</h3><br>' ;
             resultHTML += '<h3>Where: ';
             change.path.forEach(path => resultHTML += path + " ");
             resultHTML += '</h3><br>';
             resultHTML += '<h3 style="color: grey; text-decoration: line-through">Old value: ' + change.lhs + '</h3><br>'
             resultHTML += '<h3>New value: ' + change.rhs + '</h3>'
             break;
-          case 'N':
-            resultHTML += '<h3 style="color: gold;">Newly added property/element</h3>';
+          case this.ChangeType.NEW.TITLE:
+            resultHTML += '<h3 style="color: blue;">Newly added property/element</h3>';
             resultHTML += '<h3>Where: ';
             change.path.forEach(path => resultHTML += path + " ");
             resultHTML += '<h3>New value: ' + change.rhs + '</h3>'
             resultHTML += '</h3><br>';
             break;
-          case 'D':
-            resultHTML += '<h3 style="color: darkred;">Property/element was deleted</h3>';
+          case this.ChangeType.DELETED.TITLE:
+            resultHTML += '<h3 style="color: red;">Property/element was deleted</h3>';
             resultHTML += '<h3>Where: ';
             change.path.forEach(path => resultHTML += path + " ");
             resultHTML += '</h3><br>';
